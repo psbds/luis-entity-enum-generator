@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -58,6 +58,7 @@ namespace LuisEntityEnumGenerator
             {
                 var enumName = $"E{ToCamelCase(entity.Key)}";
                 var sb = new StringBuilder();
+                sb.AppendLine("using LuisEntityEnumGenerator;");
                 sb.AppendLine($"namespace {namespaceName}");
                 sb.AppendLine("{");
                 sb.AppendLine($"\tpublic enum {enumName}");
@@ -66,13 +67,14 @@ namespace LuisEntityEnumGenerator
                 var index = 0;
                 foreach (var value in entity.Value)
                 {
+                    sb.AppendLine($"\t\t[StringValue(\"{value}\")]");
                     if (index == entity.Value.Count - 1)
                     {
-                        sb.AppendLine($"\t\t{ToCamelCase(value)} = \"{value}\"");
+                        sb.AppendLine($"\t\t{ToCamelCase(value)} = {index}");
                     }
                     else
                     {
-                        sb.AppendLine($"\t\t{ToCamelCase(value)} = \"{value}\",");
+                        sb.AppendLine($"\t\t{ToCamelCase(value)} = {index},");
                     }
                     index++;
                 }
