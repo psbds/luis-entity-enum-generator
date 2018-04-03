@@ -11,16 +11,16 @@ namespace LuisEntityEnumGenerator
         {
             Type type = value.GetType();
             FieldInfo fieldInfo = type.GetField(value.ToString());
-            StringValueAttribute[] attribs = fieldInfo.GetCustomAttributes(typeof(StringValueAttribute), false) as StringValueAttribute[];
+            EntityKeyAttribute[] attribs = fieldInfo.GetCustomAttributes(typeof(EntityKeyAttribute), false) as EntityKeyAttribute[];
             return attribs.Length > 0 ? attribs[0].StringValue : null;
         }
     }
 
-    public class StringValueAttribute : Attribute
+    public class EntityKeyAttribute : Attribute
     {
         public string StringValue { get; protected set; }
 
-        public StringValueAttribute(string value)
+        public EntityKeyAttribute(string value)
         {
             this.StringValue = value;
         }

@@ -67,7 +67,7 @@ namespace LuisEntityEnumGenerator
                 var index = 0;
                 foreach (var value in entity.Value)
                 {
-                    sb.AppendLine($"\t\t[StringValue(\"{value}\")]");
+                    sb.AppendLine($"\t\t[EntityKey(\"{value}\")]");
                     if (index == entity.Value.Count - 1)
                     {
                         sb.AppendLine($"\t\t{ToCamelCase(value)} = {index}");
